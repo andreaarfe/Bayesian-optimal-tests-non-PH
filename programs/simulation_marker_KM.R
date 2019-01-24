@@ -2,7 +2,6 @@
 library(survival)
 source("./programs/functions_piecewise_exponential.R")
 source("./programs/functions_permutation_test.R")
-source("./programs/functions_simulates_trial_from_KM.R")
 load("./datasets/phase3.Rdata")
 set.seed(91343)
 
@@ -54,7 +53,7 @@ pval.bonf     <- vector(mode="numeric",length = NREPS)
 phase2_dsets  <- vector(mode="list",length = NREPS)
 phase3_dsets  <- vector(mode="list",length = NREPS)
 for(i in 1:NREPS){
-  print(i)
+  #print(i)
   # Simulates a phase II study
   phase2_dsets[[i]] <- sim.trial.rob(Nphase2,phase3,KM0,KM1,KMCens,marker.prevalence,rand)
   time   <- phase2_dsets[[i]]$time
@@ -116,9 +115,8 @@ names(pow) <- c("Permutation",
                 "Bonferroni"
                 #,"Sidak"
                 )
-sink(file="./results/marker_sims.txt")
-print(pow)
-sink()
+
+save(list="pow",file="./datasets/phase3_marker_sim.Rdata")
 
 
 
