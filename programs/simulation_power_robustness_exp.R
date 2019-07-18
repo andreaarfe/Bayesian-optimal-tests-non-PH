@@ -8,7 +8,7 @@ source("./programs/functions_piecewise_exponential.R")
 source("./programs/functions_simulations_phase3.R")
 source("./programs/functions_simulates_trial_from_KM.R")
 load("./datasets/phase3.Rdata")
-set.seed(325235)
+set.seed(3419047)
 
 # Phase 2 sample size
 NPHASE2 <- 180 
@@ -189,33 +189,46 @@ sim.results <- function(scenario,
 
 
 # run the simulation
-NCLUST <- 4 # number of clusters on which to run the simulation
-cl1<-makeCluster(NCLUST)
-clusterExport(cl1, ls())
-clusterEvalQ(cl1,
-             {library(survRM2)
-               library(parallel)
-               source("./programs/functions_simulations_phase2.R")
-               source("./programs/functions_weighted_log_rank.R")
-               source("./programs/functions_permutation_test.R")
-               source("./programs/functions_piecewise_exponential.R")
-               source("./programs/functions_simulations_phase3.R")
-               source("./programs/functions_simulates_trial_from_KM.R")
-             })
-clusterSetRNGStream(cl1,3419047)
+# NCLUST <- 4 # number of clusters on which to run the simulation
+# cl1<-makeCluster(NCLUST)
+# clusterExport(cl1, ls())
+# clusterEvalQ(cl1,
+#              {library(survRM2)
+#                library(parallel)
+#                source("./programs/functions_simulations_phase2.R")
+#                source("./programs/functions_weighted_log_rank.R")
+#                source("./programs/functions_permutation_test.R")
+#                source("./programs/functions_piecewise_exponential.R")
+#                source("./programs/functions_simulations_phase3.R")
+#                source("./programs/functions_simulates_trial_from_KM.R")
+#              })
+# clusterSetRNGStream(cl1,3419047)
+# out <- vector(mode="list",length=length(simparams))
+# for(n in seq_along(out)){
+#   clusterExport(cl1,"n")
+#   out[[n]] <- parSapply(cl1, 1:NSIM, FUN=function(i) sim.results(n,
+#                                                                  simparams,
+#                                                                  NPERM=1e3,
+#                                                                  phase3,
+#                                                                  NPHASE2,
+#                                                                  KM0,
+#                                                                  KM1,
+#                                                                  KMCens))
+# }
+# stopCluster(cl1)
 out <- vector(mode="list",length=length(simparams))
 for(n in seq_along(out)){
-  clusterExport(cl1,"n")
-  out[[n]] <- parSapply(cl1, 1:NSIM, FUN=function(i) sim.results(n,
-                                                                 simparams,
-                                                                 NPERM=1e3,
-                                                                 phase3,
-                                                                 NPHASE2,
-                                                                 KM0,
-                                                                 KM1,
-                                                                 KMCens))
+  out[[n]] <- sapply(1:NSIM, FUN=function(i) sim.results(n,
+                                                   simparams,
+                                                   NPERM=1e3,
+                                                   phase3,
+                                                   NPHASE2,
+                                                   KM0,
+                                                   KM1,
+                                                   KMCens))
 }
-stopCluster(cl1)
+
+
 
 # save the simulation results and the simulation sample sizes
 save(list=c("out","simparams"),file="./datasets/phase3_robust.Rdata")

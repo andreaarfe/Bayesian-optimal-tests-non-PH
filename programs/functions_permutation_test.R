@@ -84,13 +84,16 @@ perm_test_marker <- function(times,events,arms,markers,breaks,
   dt0 <- prep.data(times[I0],events[I0],breaks)
   dt1 <- prep.data(times[I1],events[I1],breaks)
   tobs <- log_marg_lik(dt0$ev,dt0$pt,arms[I0],breaks,alpha00,beta00,alpha10,beta10) +
-            log_marg_lik(dt1$ev,dt1$pt,arms[I1],breaks,alpha01,beta01,alpha11,beta11)
-  n <- length(times)
+    log_marg_lik(dt1$ev,dt1$pt,arms[I1],breaks,alpha01,beta01,alpha11,beta11)
+  n0 <- length(I0)
+  n1 <- length(I1)
   tsim <- vector(mode="numeric",length = nsim)
   for(i in 1:nsim){
-    asim <- sample(arms,size=n,replace = FALSE)
+    asim  <- arms
+    asim[I0] <- sample(arms[I0],size=n0,replace = FALSE)
+    asim[I1] <- sample(arms[I1],size=n1,replace = FALSE)
     tsim[i] <- log_marg_lik(dt0$ev,dt0$pt,asim[I0],breaks,alpha00,beta00,alpha10,beta10) +
-                  log_marg_lik(dt1$ev,dt1$pt,asim[I1],breaks,alpha01,beta01,alpha11,beta11)
+      log_marg_lik(dt1$ev,dt1$pt,asim[I1],breaks,alpha01,beta01,alpha11,beta11)
   }
   pval <- mean(tsim>=tobs)
   mcse <- sqrt(pval*(1-pval)/nsim)

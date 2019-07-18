@@ -56,6 +56,8 @@ pow$type <- factor(pow$type, levels=rev(levels(pow$type)))
 
 pow$color <- as.factor(pow$type=="Permutation")
 temp <- c(rep("black",7),"red")
+pow <- pow[rev(order(pow$pow)),]
+pow$type <- factor(pow$type, levels=rev(levels(pow$type)[pow$type]))
 
 p <- ggplot(pow) + geom_point(aes(x=pow,y=type,color=color),size=4)
 p <- p + scale_color_manual(values=c("black","red"))
@@ -67,11 +69,12 @@ p <- p + theme(text = element_text(size=25),
 #p <- p + scale_x_continuous(breaks = c(0.00,0.20,0.40,0.60,0.80,1.00),limits=c(0,1))
 p <- p + scale_x_continuous(breaks = c(0.00,0.20,0.40,0.50,0.60,0.70,0.80,0.90,1.00),limits=c(0.5,1))
 p <- p + scale_y_discrete(labels=rev(expression("Permutation",
+                                                "Lagged (10%)",
+                                                G^"0,1",
                                             "Adaptive",
-                                            "Mantel",
-                                            G^"0,1",
-                                            "Lagged (10%)",
-                                            "RMST")) )
+                                            "RMST",
+                                            "Mantel"
+                                            )) )
 
 ggsave("./results/figure_phase2_pred_power.pdf",width=7,height=4,plot=p,device="pdf")
 #dev.off()
