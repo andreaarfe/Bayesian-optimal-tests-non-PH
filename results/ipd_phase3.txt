@@ -1,0 +1,8 @@
+Call:
+survdiff(formula = Surv(Time, Event) ~ Arm, data = phase3)
+
+        N Observed Expected (O-E)^2/E (O-E)^2/V
+Arm=0 121       82       67      3.38         5
+Arm=1 240      130      145      1.56         5
+
+ Chisq= 5  on 1 degrees of freedom, p= 0.03 
