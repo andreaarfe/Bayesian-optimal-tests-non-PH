@@ -1,0 +1,9 @@
+[1] "Scenario 1 - sim from KM"
+ Stratified Cox Cox, Bonferroni AFT, Bonferroni     Permutation 
+         0.4126          0.6457          0.1716          0.9034 
+[1] "Scenario 2 - sim from exp dist"
+ Stratified Cox Cox, Bonferroni AFT, Bonferroni     Permutation 
+         0.4661          0.6940          0.5793          0.4380 
+[1] "Scenario 3 - sim from log-normal"
+ Stratified Cox Cox, Bonferroni AFT, Bonferroni     Permutation 
+         0.4453          0.6842          0.2034          0.7641 
