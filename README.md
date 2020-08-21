@@ -1,5 +1,5 @@
-# Bayesian optimality of testing procedures for survival data in the non-proportional hazards setting
-Programs to replicate the analyses of the paper "Bayesian optimality of testing procedures for survival data in the non-proportional hazards setting".
+# Optimality of testing procedures for survival data in the non-proportional hazards setting
+Programs to replicate the analyses of the paper "Optimality of testing procedures for survival data in the non-proportional hazards setting" (Arfè A. et al., Biometrics 2020; https://arxiv.org/abs/1902.00161).
 
 To re-run all analysis, just execute 
 ```
