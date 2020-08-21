@@ -11,9 +11,7 @@ Contents:
 ---------
 
 * ./digitized survival curves/ - raw input data
-* ./programs/ - programs to run the simulations and prepare Figures 1a-c
+* ./programs/ - programs to run the simulations 
 * ./datasets/ - generated datasets
-* ./results/figure_phase3_post_plot.pdf - Figure 1a
-* ./results/figure_phase2_pred_power.pdf - Figure 1b
-* ./results/figure_sensitivity.pdf - Figure 1c
-* ./results/figure_marker.pdf - Figure 2
+* ./results/ - numerical results and figures
+
