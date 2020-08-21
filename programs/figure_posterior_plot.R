@@ -70,6 +70,7 @@ p <- p + scale_color_manual(values=c(rgb(0,0,1),rgb(1,0.4,0)))
 p <- p + guides(color=FALSE)
 p <- p + annotate("text",x=14,y=0.5,label="Nivolumab",col=rgb(1,0.4,0),size=7)
 p <- p + annotate("text",x=7,y=0.1,label="Standard of care",col=rgb(0,0,1),size=7)
+p <- p + geom_vline(xintercept = breaks[-1], linetype = "dotted")
 ggsave("./results/figure_phase3_post_plot.pdf",height = 4,width = 7,device = "pdf", plot=p)
 
 
